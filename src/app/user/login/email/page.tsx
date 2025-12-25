@@ -2,11 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { AuthLayout, Input, Button } from "@/components";
 
 export default function UserEmailSignInPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -38,16 +36,15 @@ export default function UserEmailSignInPage() {
 
     setIsSubmitting(true);
     
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("User sign in with:", { email, password });
-      // Redirect to dashboard on successful login
-      router.push("/user/dashboard");
-    } catch {
-      setErrors({ email: "Invalid email or password" });
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Simulate login
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("User signed in with:", { email, password });
+    
+    // Store user in localStorage to simulate authentication
+    localStorage.setItem("user", JSON.stringify({ email, type: "user" }));
+    
+    // Redirect to dashboard
+    window.location.href = "/user/dashboard";
   };
 
   return (

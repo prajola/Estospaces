@@ -2,16 +2,15 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { AuthLayout, GoogleButton, Button } from "@/components";
 
 export default function UserSignUpPage() {
-  const router = useRouter();
-
   const handleGoogleSignUp = () => {
     console.log("User Google sign-up clicked");
-    // Simulate Google sign-up and redirect to dashboard
-    router.push("/user/dashboard");
+    // Store user in localStorage to simulate authentication
+    localStorage.setItem("user", JSON.stringify({ email: "user@google.com", type: "user" }));
+    // Redirect to dashboard
+    window.location.href = "/user/dashboard";
   };
 
   return (

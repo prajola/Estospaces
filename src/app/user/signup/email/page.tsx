@@ -38,16 +38,15 @@ export default function UserEmailSignUpPage() {
 
     setIsSubmitting(true);
     
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("User sign up with:", { email, password });
-      // Redirect to dashboard on successful signup
-      router.push("/user/dashboard");
-    } catch {
-      setErrors({ email: "An error occurred. Please try again." });
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Simulate account creation
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("User account created with:", { email, password });
+    
+    // Store user in localStorage to simulate authentication
+    localStorage.setItem("user", JSON.stringify({ email, type: "user" }));
+    
+    // Redirect to dashboard
+    window.location.href = "/user/dashboard";
   };
 
   return (
