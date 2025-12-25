@@ -3,3 +3,7 @@ export { AuthLayout } from "./AuthLayout";
 export { Input } from "./Input";
 export { Button } from "./Button";
 export { GoogleButton } from "./GoogleButton";
+export { DashboardSidebar } from "./DashboardSidebar";
+export { DashboardHeader } from "./DashboardHeader";
+export { PropertyCard } from "./PropertyCard";
+export { DashboardTabs } from "./DashboardTabs";
