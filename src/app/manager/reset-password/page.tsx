@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { AuthLayout, Input, Button } from "@/components";
 
-export default function ResetPasswordPage() {
+export default function ManagerResetPasswordPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,10 +29,9 @@ export default function ResetPasswordPage() {
 
     setIsSubmitting(true);
     
-    // Simulate API call
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Reset password for:", email);
+      console.log("Manager reset password for:", email);
       setIsSuccess(true);
     } catch {
       setError("An error occurred. Please try again.");
@@ -43,7 +42,7 @@ export default function ResetPasswordPage() {
 
   if (isSuccess) {
     return (
-      <AuthLayout>
+      <AuthLayout userType="manager">
         <div className="space-y-6">
           <div>
             <h1 className="text-2xl font-semibold text-gray-900">
@@ -56,7 +55,7 @@ export default function ResetPasswordPage() {
 
           <div className="text-center">
             <Link
-              href="/login"
+              href="/manager/login"
               className="text-[#F97316] hover:text-[#EA580C] font-medium text-sm"
             >
               Back to Sign in
@@ -68,7 +67,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <AuthLayout>
+    <AuthLayout userType="manager">
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">
@@ -98,7 +97,7 @@ export default function ResetPasswordPage() {
 
         <div className="text-center">
           <Link
-            href="/login/email"
+            href="/manager/login/email"
             className="text-[#F97316] hover:text-[#EA580C] font-medium text-sm"
           >
             Back to Sign in

@@ -4,39 +4,49 @@ import React from "react";
 import Link from "next/link";
 import { AuthLayout, GoogleButton, Button } from "@/components";
 
-export default function LoginPage() {
+export default function ManagerLoginPage() {
   const handleGoogleSignIn = () => {
-    // Handle Google sign-in
-    console.log("Google sign-in clicked");
+    console.log("Manager Google sign-in clicked");
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout userType="manager">
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">
-            Sign in to Estospaces
+            Property Manager Sign In
           </h1>
+          <p className="mt-1 text-sm text-gray-500">
+            Access your dashboard to manage properties
+          </p>
         </div>
 
         <div className="space-y-4">
           <GoogleButton onClick={handleGoogleSignIn} text="Sign in with Google" />
 
-          <Link href="/login/email">
+          <Link href="/manager/login/email">
             <Button variant="outline" fullWidth className="mt-3">
               Sign in with email
             </Button>
           </Link>
         </div>
 
-        <div className="text-center">
+        <div className="space-y-2 text-center">
           <p className="text-sm text-gray-500">
             Don&apos;t have an account?{" "}
             <Link
-              href="/signup"
+              href="/manager/signup"
               className="text-[#F97316] hover:text-[#EA580C] font-medium"
             >
               Sign up
+            </Link>
+          </p>
+          <p className="text-sm text-gray-500">
+            <Link
+              href="/"
+              className="text-gray-400 hover:text-gray-600"
+            >
+              ← Back to home
             </Link>
           </p>
         </div>

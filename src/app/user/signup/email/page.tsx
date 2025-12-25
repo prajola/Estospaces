@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { AuthLayout, Input, Button } from "@/components";
 
-export default function EmailSignInPage() {
+export default function UserEmailSignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -36,31 +36,29 @@ export default function EmailSignInPage() {
 
     setIsSubmitting(true);
     
-    // Simulate API call
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Sign in with:", { email, password });
-      // Handle successful sign-in
+      console.log("User sign up with:", { email, password });
     } catch {
-      setErrors({ email: "Invalid email or password" });
+      setErrors({ email: "An error occurred. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout userType="user">
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">
-            Sign in to continue
+            Create your account
           </h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             type="email"
-            placeholder="Enter your email"
+            placeholder="Email"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -71,7 +69,7 @@ export default function EmailSignInPage() {
 
           <Input
             type="password"
-            placeholder="Enter your password"
+            placeholder="Password"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -82,27 +80,18 @@ export default function EmailSignInPage() {
           />
 
           <Button type="submit" fullWidth disabled={isSubmitting}>
-            {isSubmitting ? "Signing in..." : "Sign in"}
+            {isSubmitting ? "Creating account..." : "Create account"}
           </Button>
         </form>
 
-        <div className="space-y-4 text-center">
+        <div className="text-center">
           <p className="text-sm text-gray-500">
-            Don&apos;t have an account?{" "}
+            Already have an account?{" "}
             <Link
-              href="/signup"
+              href="/user/login"
               className="text-[#F97316] hover:text-[#EA580C] font-medium"
             >
-              Sign up
-            </Link>
-          </p>
-          <p className="text-sm text-gray-500">
-            Forgot your password?{" "}
-            <Link
-              href="/reset-password"
-              className="text-[#F97316] hover:text-[#EA580C] font-medium"
-            >
-              Reset Password
+              Sign in
             </Link>
           </p>
         </div>
