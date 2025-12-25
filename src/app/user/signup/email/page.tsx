@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AuthLayout, Input, Button } from "@/components";
 
 export default function UserEmailSignUpPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -39,6 +41,8 @@ export default function UserEmailSignUpPage() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log("User sign up with:", { email, password });
+      // Redirect to dashboard on successful signup
+      router.push("/user/dashboard");
     } catch {
       setErrors({ email: "An error occurred. Please try again." });
     } finally {

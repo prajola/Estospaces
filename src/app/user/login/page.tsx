@@ -2,11 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AuthLayout, GoogleButton, Button } from "@/components";
 
 export default function UserLoginPage() {
+  const router = useRouter();
+
   const handleGoogleSignIn = () => {
     console.log("User Google sign-in clicked");
+    // Simulate Google sign-in and redirect to dashboard
+    router.push("/user/dashboard");
   };
 
   return (
