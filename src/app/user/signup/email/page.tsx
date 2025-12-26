@@ -2,16 +2,23 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AuthLayout, Input, Button } from "@/components";
 
 export default function UserEmailSignUpPage() {
+  const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = () => {
-    const newErrors: { email?: string; password?: string } = {};
+    const newErrors: { name?: string; email?: string; password?: string } = {};
+
+    if (!name) {
+      newErrors.name = "Name is required";
+    }
 
     if (!email) {
       newErrors.email = "Email is required";
@@ -22,7 +29,16 @@ export default function UserEmailSignUpPage() {
     if (!password) {
       newErrors.password = "Password is required";
     } else if (password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
+      newErrors.password = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+    } else {
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumber = /[0-9]/.test(password);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+      
+      if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {
+        newErrors.password = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+      }
     }
 
     setErrors(newErrors);
@@ -37,11 +53,40 @@ export default function UserEmailSignUpPage() {
     setIsSubmitting(true);
     
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("User sign up with:", { email, password });
-    } catch {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          userType: "user",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.error?.includes("email")) {
+          setErrors({ email: data.error || "Please enter a valid email address" });
+        } else {
+          setErrors({ email: data.error || "An error occurred. Please try again." });
+        }
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Store name in localStorage if provided
+      if (name) {
+        localStorage.setItem(`userName_${email}`, name);
+      }
+
+      // Redirect to login page after successful signup
+      router.push("/user/login");
+    } catch (error) {
       setErrors({ email: "An error occurred. Please try again." });
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -51,13 +96,26 @@ export default function UserEmailSignUpPage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">
-            Create your account
+            Sign up for Estospaces
           </h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
+            type="text"
+            label="Name"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (errors.name) setErrors({ ...errors, name: undefined });
+            }}
+            error={errors.name}
+          />
+
+          <Input
             type="email"
+            label="Email"
             placeholder="Email"
             value={email}
             onChange={(e) => {
@@ -69,6 +127,7 @@ export default function UserEmailSignUpPage() {
 
           <Input
             type="password"
+            label="Password"
             placeholder="Password"
             value={password}
             onChange={(e) => {
@@ -80,7 +139,7 @@ export default function UserEmailSignUpPage() {
           />
 
           <Button type="submit" fullWidth disabled={isSubmitting}>
-            {isSubmitting ? "Creating account..." : "Create account"}
+            {isSubmitting ? "Signing up..." : "Sign up"}
           </Button>
         </form>
 
@@ -89,7 +148,7 @@ export default function UserEmailSignUpPage() {
             Already have an account?{" "}
             <Link
               href="/user/login"
-              className="text-[#F97316] hover:text-[#EA580C] font-medium"
+              className="text-[#FF7700] hover:text-[#F97316] font-medium"
             >
               Sign in
             </Link>

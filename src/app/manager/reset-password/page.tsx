@@ -56,7 +56,7 @@ export default function ManagerResetPasswordPage() {
           <div className="text-center">
             <Link
               href="/manager/login"
-              className="text-[#F97316] hover:text-[#EA580C] font-medium text-sm"
+              className="text-[#FF7700] hover:text-[#F97316] font-medium text-sm"
             >
               Back to Sign in
             </Link>
@@ -98,7 +98,7 @@ export default function ManagerResetPasswordPage() {
         <div className="text-center">
           <Link
             href="/manager/login/email"
-            className="text-[#F97316] hover:text-[#EA580C] font-medium text-sm"
+            className="text-[#FF7700] hover:text-[#F97316] font-medium text-sm"
           >
             Back to Sign in
           </Link>

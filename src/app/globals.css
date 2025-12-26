@@ -3,8 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #F97316;
-  --primary-hover: #EA580C;
+  --primary: #FF7700;
+  --primary-hover: #FF7700;
   --error: #EF4444;
   --error-light: #FEE2E2;
   --gray-100: #F3F4F6;
@@ -41,11 +41,83 @@ body {
   background: #f1f1f1;
 }
 
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+[data-theme="ocean"] ::-webkit-scrollbar-track {
+  background: #dbeafe;
+}
+
 ::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 4px;
 }
 
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+[data-theme="ocean"] ::-webkit-scrollbar-thumb {
+  background: #60a5fa;
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1a1;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+[data-theme="ocean"] ::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Dark theme styles */
+[data-theme="dark"] {
+  --background: #111827;
+  --foreground: #f9fafb;
+  --card-bg: #1f2937;
+  --card-border: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --input-bg: #1f2937;
+  --input-border: #374151;
+  --input-text: #f9fafb;
+  --input-placeholder: #6b7280;
+  --sidebar-bg: #0f172a;
+  --sidebar-border: #1e293b;
+}
+
+[data-theme="ocean"] {
+  --background: #eff6ff;
+  --foreground: #1e3a8a;
+  --card-bg: #dbeafe;
+  --card-border: #93c5fd;
+  --text-primary: #1e3a8a;
+  --text-secondary: #1e40af;
+  --text-tertiary: #3b82f6;
+  --input-bg: #dbeafe;
+  --input-border: #93c5fd;
+  --input-text: #1e3a8a;
+  --input-placeholder: #60a5fa;
+  --sidebar-bg: #bfdbfe;
+  --sidebar-border: #93c5fd;
+}
+
+/* Light theme (default) */
+:root {
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-text: #111827;
+  --input-placeholder: #9ca3af;
+  --sidebar-bg: #f9fafb;
+  --sidebar-border: #e5e7eb;
 }

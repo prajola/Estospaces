@@ -19,17 +19,15 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, userType }) =>
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`,
           }}
-        >
-          <div className="absolute inset-0 bg-red-600/20"></div>
-        </div>
+        />
       </div>
 
       {/* Right side - Content */}
-      <div className="w-full lg:w-1/2 flex flex-col min-h-screen">
+      <div className="w-full lg:w-1/2 flex flex-col min-h-screen bg-white">
         <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 xl:px-24">
           <div className="w-full max-w-md mx-auto">
             <Link href="/">
-              <Logo className="mb-4" />
+              <Logo className="mb-6" />
             </Link>
             
             {userType && (
@@ -65,7 +63,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, userType }) =>
         {/* Footer */}
         <div className="px-8 sm:px-12 lg:px-16 xl:px-24 py-6">
           <p className="text-xs text-gray-400 text-center">
-            By continuing, you agree to Estospaces&apos;s{" "}
+            By continuing, you&apos;re agreeing to Estospaces&apos;s{" "}
             <a href="#" className="text-gray-500 hover:underline">
               Terms of Service
             </a>{" "}

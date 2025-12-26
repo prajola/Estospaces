@@ -40,7 +40,7 @@ export const Input: React.FC<InputProps> = ({
             ${
               error
                 ? "border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-200"
-                : "border-gray-300 bg-white focus:border-[#F97316] focus:ring-orange-200"
+                : "border-gray-300 bg-white focus:border-[#FF7700] focus:ring-orange-200"
             }
             ${className}
           `}
