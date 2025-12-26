@@ -11,6 +11,10 @@ export default function UserSignUpPage() {
 
   const handleGoogleSignUp = () => {
     console.log("User Google sign-up clicked");
+    // Store user in localStorage to simulate authentication
+    localStorage.setItem("user", JSON.stringify({ email: "user@google.com", type: "user" }));
+    // Redirect to dashboard
+    window.location.href = "/user/dashboard";
   };
 
   const handleEmailSignUp = () => {
